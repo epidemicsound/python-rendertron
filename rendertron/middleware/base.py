@@ -73,8 +73,9 @@ class RendertronMiddleware:
         try:
             with urlopen(proxy_url) as response:
                 data = response.read()
+                print("hello", data)
                 # Should we store the response code, headers etc?
-                metas = ["content_type", "status_code", "reason", "charset"]
+                metas = ["code", "reason", "status"]
                 meta = {key: getattr(response, key) for key in metas}
                 self.storage.store_response(request, data, meta)
                 return data, meta
