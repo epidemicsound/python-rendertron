@@ -73,12 +73,13 @@ class RendertronMiddleware:
         try:
             with urlopen(proxy_url) as response:
                 data = response.read()
-                print("hello", data)
+                print("hello from render")
                 # Should we store the response code, headers etc?
                 metas = ["code", "reason", "status"]
                 meta = {key: getattr(response, key) for key in metas}
                 self.storage.store_response(request, data, meta)
                 return data, meta
-        except Exception:
+        except Exception as e:
+            print(e)
             pass
         return None, None
