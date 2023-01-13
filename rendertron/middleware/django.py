@@ -84,9 +84,9 @@ class DjangoRendertronMiddleware(RendertronMiddleware):
 
             if content is not None:
                 # possible keyword arguments of HttpResponse
-                kwargs = ["content_type", "status", "reason", "charset"]
+                metas = ["content_type", "status_code", "reason", "charset"]
                 return HttpResponse(
-                    content=content, **{key: meta[key] for key in meta if key in kwargs}
+                    content=content, **{key: meta[key] for key in meta if key in metas}
                 )
 
         # No rendered response was returned, continue as normal:
